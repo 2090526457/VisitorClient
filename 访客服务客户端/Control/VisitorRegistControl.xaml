@@ -1,0 +1,224 @@
+﻿<UserControl x:Class="Visitor.Converter.VisitorRegistControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:WPFMediaKit="clr-namespace:WPFMediaKit.DirectShow.Controls;assembly=WPFMediaKit"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Visitor.Converter"
+             xmlns:localc="clr-namespace:Visitor.Convert"
+             mc:Ignorable="d" 
+             d:DesignHeight="440" d:DesignWidth="834">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="tf" Color="{DynamicResource Primary300Foreground}" />
+            <localc:ColorNameConverter x:Key="ColorNameConverter" />
+            <localc:VisitorRegistControlSexConverter x:Key="VisitorRegistControlSexConverter" />
+            <localc:VisitorRegistControlIDAreaEnableConverter x:Key="VisitorRegistControlIDAreaEnableConverter" />
+            <localc:VisitorRegistControlOtherAreaEnableConverter x:Key="VisitorRegistControlOtherAreaEnableConverter" />
+            <localc:VisitorRegistControlPhotoEnableConverter x:Key="VisitorRegistControlPhotoEnableConverter" />
+            <localc:VisitorRegistControlRePhotoEnableConverter x:Key="VisitorRegistControlRePhotoEnableConverter" />
+            <localc:VisitorRegistControlNextEnableConverter x:Key="VisitorRegistControlNextEnableConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Grid.IsSharedSizeScope="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Margin="30,5,0,5" Text="访客信息" FontSize="20" FontWeight="Bold">
+            <TextBlock.Foreground>
+                <SolidColorBrush Color="{DynamicResource Primary900}" />
+            </TextBlock.Foreground>
+        </TextBlock>
+        <Grid Grid.Row="1" Margin="20, 0, 20, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="144px" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="191px" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.RowSpan="5" Margin="0,10,0,0" >
+                <Image x:Name="photo" Source="{Binding ParameterModel.Visitor.PhotoData, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource s2b}}" Stretch="Fill" />
+            </Grid>
+            <Grid  Grid.Column="1" Margin="10,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" FontSize="16" Foreground="{Binding ElementName=txtName, Path=BorderBrush}">
+                    <TextBlock.Inlines>
+                        <Run Foreground="Red">*</Run>
+                        <Run xml:space="preserve">姓        名：</Run>
+                    </TextBlock.Inlines>
+                </TextBlock>
+                <TextBox x:Name="txtName" IsEnabled="{Binding ParameterType, Converter={StaticResource VisitorRegistControlIDAreaEnableConverter}}" Text="{Binding ParameterModel.Visitor.Name, NotifyOnSourceUpdated=True, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="110" Margin="0,-8,0,0" Grid.Column="1" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            </Grid>
+            <Grid  Grid.Column="2" Grid.ColumnSpan="2" Margin="20,0,0,0" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" Text="性        别：" FontSize="16" Foreground="{Binding ElementName=cbSex, Path=BorderBrush}" />
+                <ComboBox x:Name="cbSex" IsEnabled="{Binding ParameterType, Converter={StaticResource VisitorRegistControlIDAreaEnableConverter}}" Width="110" SelectedIndex="{Binding ParameterModel.Visitor.IsMale, NotifyOnSourceUpdated=True, Mode=TwoWay, Converter={StaticResource VisitorRegistControlSexConverter}}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" FontSize="16" materialDesign:HintAssist.Hint="请选择性别" >
+                    <ComboBoxItem>男</ComboBoxItem>
+                    <ComboBoxItem>女</ComboBoxItem>
+                </ComboBox>
+            </Grid>
+            <Grid  Grid.Row="1" Grid.Column="1" Margin="10,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" FontSize="16" Foreground="{Binding ElementName=txtMz, Path=BorderBrush}">
+                    <TextBlock.Inlines>
+                        <Run Foreground="Transparent">*</Run>
+                        <Run xml:space="preserve">民        族：</Run>
+                    </TextBlock.Inlines>
+                </TextBlock>
+                <TextBox x:Name="txtMz" IsEnabled="{Binding ParameterType, Converter={StaticResource VisitorRegistControlIDAreaEnableConverter}}" Text="{Binding ParameterModel.Visitor.Nation, NotifyOnSourceUpdated=True, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="110" Margin="0,-8,0,0" Grid.Column="1" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            </Grid>
+            <Grid  Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Margin="20,0,0,0"  HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" Text="出生日期：" FontSize="16" Foreground="{Binding ElementName=dpb, Path=BorderBrush}" />
+                <DatePicker Name="dpb" IsEnabled="{Binding ParameterType, Converter={StaticResource VisitorRegistControlIDAreaEnableConverter}}" SelectedDate="{Binding ParameterModel.Visitor.Birthd, Mode=TwoWay, NotifyOnSourceUpdated=True, StringFormat='{}{0:yyyy-MM-dd}'}" Grid.Column="1" Language="zh-CN" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Width="110" materialDesign:HintAssist.Hint="请选择日期" />
+            </Grid>
+            <Grid  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="10,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" FontSize="16" Foreground="{Binding ElementName=txtId, Path=BorderBrush}">
+                    <TextBlock.Inlines>
+                        <Run Foreground="Red">*</Run>
+                        <Run xml:space="preserve">身份证号：</Run>
+                    </TextBlock.Inlines>
+                </TextBlock>
+                <TextBox x:Name="txtId" IsEnabled="{Binding ParameterType, Converter={StaticResource VisitorRegistControlIDAreaEnableConverter}}" Text="{Binding ParameterModel.Visitor.IdCardNumber, NotifyOnSourceUpdated=True, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,-8,0,0" Grid.Column="1" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            </Grid>
+            <Grid  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Margin="10,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" FontSize="16" Foreground="{Binding ElementName=txtAddress, Path=BorderBrush}">
+                    <TextBlock.Inlines>
+                        <Run Foreground="Transparent">*</Run>
+                        <Run xml:space="preserve">住        址：</Run>
+                    </TextBlock.Inlines>
+                </TextBlock>
+                <TextBox x:Name="txtAddress" IsEnabled="{Binding ParameterType, Converter={StaticResource VisitorRegistControlIDAreaEnableConverter}}" Text="{Binding ParameterModel.Visitor.IdcardAddr, NotifyOnSourceUpdated=True, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,-8,0,0" Grid.Column="1" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            </Grid>
+            <Grid  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3"  Margin="10,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" FontSize="16" Foreground="{Binding ElementName=txtQf, Path=BorderBrush}">
+                    <TextBlock.Inlines>
+                        <Run Foreground="Transparent">*</Run>
+                        <Run xml:space="preserve">签发机关：</Run>
+                    </TextBlock.Inlines>
+                </TextBlock>
+                <TextBox x:Name="txtQf" IsEnabled="{Binding ParameterType, Converter={StaticResource VisitorRegistControlIDAreaEnableConverter}}" Text="{Binding ParameterModel.Visitor.IdCardVisaplace, NotifyOnSourceUpdated=True, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,-8,0,0" Grid.Column="1" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            </Grid>
+            <Grid  Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Margin="10,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" FontSize="16" Foreground="{Binding ElementName=dps, Path=BorderBrush}">
+                    <TextBlock.Inlines>
+                        <Run Foreground="Transparent">*</Run>
+                        <Run xml:space="preserve">有  效  期：</Run>
+                    </TextBlock.Inlines>
+                </TextBlock>
+                <DatePicker Name="dps" IsEnabled="{Binding ParameterType, Converter={StaticResource VisitorRegistControlIDAreaEnableConverter}}" SelectedDate="{Binding ParameterModel.Visitor.IdCardStart, Mode=TwoWay, NotifyOnSourceUpdated=True, StringFormat='{}{0:yyyy-MM-dd}'}" Grid.Column="1" Language="zh-CN" VerticalAlignment="Center" FontSize="16" Width="110" materialDesign:HintAssist.Hint="起始日期" />
+                <TextBlock Text="   至   " FontSize="16" VerticalAlignment="Center" Grid.Column="2" />
+                <DatePicker Name="dpe" IsEnabled="{Binding ParameterType, Converter={StaticResource VisitorRegistControlIDAreaEnableConverter}}" SelectedDate="{Binding ParameterModel.Visitor.IdCardEnd, Mode=TwoWay, NotifyOnSourceUpdated=True, StringFormat='{}{0:yyyy-MM-dd}'}" Grid.Column="3" Language="zh-CN" VerticalAlignment="Center" FontSize="16" Width="110" materialDesign:HintAssist.Hint="终止日期" />
+            </Grid>
+            <Grid x:Name="gvce" Grid.Column="5" Grid.RowSpan="6" Margin="10,0,0,0" VerticalAlignment="Center" ClipToBounds="True" >
+                <WPFMediaKit:VideoCaptureElement Stretch="Uniform" Name="vce"/>
+            </Grid>
+            <Grid Grid.Row="6" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" Text="公司名称：" FontSize="16" Foreground="{Binding ElementName=txtGs, Path=BorderBrush}" />
+                <TextBox x:Name="txtGs" IsEnabled="{Binding ParameterType, Converter={StaticResource VisitorRegistControlOtherAreaEnableConverter}}" Text="{Binding ParameterModel.Visitor.Company, NotifyOnSourceUpdated=True, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,-8,0,0" Grid.Column="1" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            </Grid>
+            <Grid Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Margin="20,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" FontSize="16" Foreground="{Binding ElementName=txtDh, Path=BorderBrush}">
+                    <TextBlock.Inlines>
+                        <Run Foreground="Red">*</Run>
+                        <Run xml:space="preserve">电    话：</Run>
+                    </TextBlock.Inlines>
+                </TextBlock>
+                <TextBox x:Name="txtDh" IsEnabled="{Binding ParameterType, Converter={StaticResource VisitorRegistControlOtherAreaEnableConverter}}" Text="{Binding ParameterModel.Visitor.Phone, NotifyOnSourceUpdated=True, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,-8,0,0" Grid.Column="1" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            </Grid>
+            <Grid Grid.Row="7" Grid.ColumnSpan="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" Text="备        注：" FontSize="16" Foreground="{Binding ElementName=txtBz, Path=BorderBrush}" />
+                <TextBox x:Name="txtBz" IsEnabled="{Binding ParameterType, Converter={StaticResource VisitorRegistControlOtherAreaEnableConverter}}" Text="{Binding ParameterModel.Visitor.Remark, NotifyOnSourceUpdated=True, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,-8,0,0" Grid.Column="1" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            </Grid>
+            <Grid Grid.Row="6" Grid.RowSpan="2" VerticalAlignment="Bottom" Grid.Column="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20px" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Click="Capture_Click" IsEnabled="{Binding ParameterModel.Visitor.PhotoData, Converter={StaticResource VisitorRegistControlPhotoEnableConverter}}" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Camera" Width="24" Height="24"/>
+                </Button>
+                <Button Click="Capture_Click" IsEnabled="{Binding ParameterModel.Visitor.PhotoData, Converter={StaticResource VisitorRegistControlRePhotoEnableConverter}}" Grid.Column="2" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="CameraPartyMode" Width="24" Height="24"/>
+                </Button>
+            </Grid>
+        </Grid>
+        <Button Grid.Row="2" Content="下一步" Margin="0,10,0,30"  Style="{StaticResource MaterialDesignRaisedButton}" Width="100" Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" Click="Next_Click" HorizontalAlignment="Center">
+            <Button.IsEnabled>
+                <MultiBinding Mode="OneWay" NotifyOnSourceUpdated="True" UpdateSourceTrigger="PropertyChanged">
+                    <MultiBinding.Converter>
+                        <localc:VisitorRegistControlNextEnableConverter />
+                    </MultiBinding.Converter>
+                    <Binding ElementName="txtName" Path="Text" />
+                    <Binding ElementName="txtMz" Path="Text" />
+                    <Binding ElementName="txtId" Path="Text" />
+                    <Binding ElementName="txtAddress" Path="Text" />
+                    <Binding ElementName="txtQf" Path="Text" />
+                    <Binding ElementName="txtDh" Path="Text" />
+                    <Binding ElementName="photo" Path="Source" />
+                    <Binding Path="ParameterType" />
+                </MultiBinding>
+            </Button.IsEnabled>
+        </Button>
+    </Grid>
+</UserControl>

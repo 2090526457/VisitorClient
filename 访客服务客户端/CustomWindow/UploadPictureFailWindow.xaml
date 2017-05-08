@@ -1,0 +1,38 @@
+﻿<Window x:Class="Visitor.CustomWindow.UploadPictureFailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Visitor.CustomWindow"
+        mc:Ignorable="d"
+        Title="UploadPictureFailWindow" Height="80" BorderBrush="Black" BorderThickness="1" Width="180" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource Primary500}"/>
+    </Window.Background>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Center" FontSize="20" Text="上传图片失败！">
+            <TextBlock.Foreground>
+                <SolidColorBrush Color="{DynamicResource Primary500Foreground}" />
+            </TextBlock.Foreground>
+        </TextBlock>
+        <Button Grid.Row="1" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}" Click="OK_Click">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource Primary500Foreground}" />
+            </Button.Foreground>
+            确定
+        </Button>
+    </Grid>
+</Window>

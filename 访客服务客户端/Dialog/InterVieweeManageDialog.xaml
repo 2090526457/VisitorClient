@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="Visitor.Dialog.InterVieweeManageDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Visitor.Dialog"
+             xmlns:localv="clr-namespace:Visitor.View"
+             xmlns:localct="clr-namespace:Visitor.Converter"
+             xmlns:localvm="clr-namespace:Visitor.ViewModel"
+             Width="834" Height="470">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Click="Cancel_Click"
+                        Margin="0,10,10,0" Width="32" Height="32" HorizontalAlignment="Right" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" >
+            <materialDesign:PackIcon Kind="Close" Height="24" Width="24" />
+        </Button>
+        <materialDesign:Transitioner x:Name="ts" Grid.Row="1" SelectedIndex="0">
+            <materialDesign:TransitionerSlide ClipToBounds="True" x:Name="ts1">
+                <materialDesign:TransitionerSlide.OpeningEffects>
+                    <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:1" />
+                </materialDesign:TransitionerSlide.OpeningEffects>
+                <localct:VisitorRegistControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            </materialDesign:TransitionerSlide>
+            <materialDesign:TransitionerSlide ClipToBounds="True" x:Name="ts2">
+                <materialDesign:TransitionerSlide.OpeningEffects>
+                    <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:1" />
+                </materialDesign:TransitionerSlide.OpeningEffects>
+                <localct:FingerprintCaptureControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            </materialDesign:TransitionerSlide>
+            <materialDesign:TransitionerSlide ClipToBounds="True" x:Name="ts3">
+                <materialDesign:TransitionerSlide.OpeningEffects>
+                    <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:1" />
+                </materialDesign:TransitionerSlide.OpeningEffects>
+                <localct:AuthorizationControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
+    </Grid>
+</UserControl>

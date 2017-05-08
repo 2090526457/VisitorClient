@@ -1,0 +1,90 @@
+﻿<Window x:Class="Visitor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:Visitor"
+        xmlns:localmui="clr-namespace:Visitor.Model.UI"
+        xmlns:localv="clr-namespace:Visitor.View"
+        xmlns:localvm="clr-namespace:Visitor.ViewModel"
+        xmlns:localh="clr-namespace:Visitor.Helper"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="670" Width="1220" Icon="Image/UserKey_32x32.ico" Closed="Window_Closed"
+        BorderThickness="2">
+    <Window.BorderBrush>
+        <SolidColorBrush Color="{DynamicResource Primary500}"/>
+    </Window.BorderBrush>
+    <Window.DataContext>
+        <localvm:MainWindowViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <localh:NotificationAreaIcon x:Name="notifyIcon" Text="指静脉访客管理系统" Icon="Image/UserKey_32x32.ico" MouseDoubleClick="OnNotificationAreaIconDoubleClick">
+            <localh:NotificationAreaIcon.MenuItems>
+                <forms:MenuItem Text="退出" Click="ExitMenuItem_Click" />
+            </localh:NotificationAreaIcon.MenuItems>
+        </localh:NotificationAreaIcon>
+        <materialDesign:DialogHost Identifier="MainRootDialog">
+            <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+                <materialDesign:DrawerHost.LeftDrawerContent>
+                    <DockPanel>
+                        <DockPanel.Background>
+                            <SolidColorBrush Color="{DynamicResource Primary500}" />
+                        </DockPanel.Background>
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="16" IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}">
+                            <ToggleButton.Foreground>
+                                <SolidColorBrush Color="{DynamicResource Primary500Foreground}" />
+                            </ToggleButton.Foreground>
+                        </ToggleButton>
+                        <ListBox x:Name="DemoItemsListBox" SelectedIndex="0" PreviewMouseLeftButtonUp="UIElement_OnPreviewMouseLeftButtonUp">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="localmui:PanelItem">
+                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="{Binding ItemName}" Margin="32 0 32 0" >
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="{DynamicResource Primary500Foreground}" />
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <localmui:PanelItem ItemName="配置">
+                                <localmui:PanelItem.Content>
+                                    <localv:SettingView />
+                                </localmui:PanelItem.Content>
+                            </localmui:PanelItem>
+                            <localmui:PanelItem ItemName="主页">
+                                <localmui:PanelItem.Content>
+                                    <localv:HomeView />
+                                </localmui:PanelItem.Content>
+                            </localmui:PanelItem>
+                        </ListBox>
+                    </DockPanel>
+                </materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel>
+                    <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth3" Mode="PrimaryMid" DockPanel.Dock="Top" MouseDoubleClick="ColorZone_MouseDoubleClick" MouseDown="ColorZone_MouseDown">
+                        <DockPanel>
+                            <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False" x:Name="MenuToggleButton"/>
+                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}" DockPanel.Dock="Right" Command="{Binding ExitCommand}">
+                                <materialDesign:PackIcon Kind="WindowClose" Width="36" Height="36" VerticalAlignment="Center"/>
+                            </Button>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26" FontWeight="Bold">指静脉访客系统</TextBlock>
+                        </DockPanel>
+                    </materialDesign:ColorZone>
+                    <ContentControl Margin="16" Content="{Binding ElementName=DemoItemsListBox, Path=SelectedItem.Content}" />
+                </DockPanel>
+            </materialDesign:DrawerHost>
+        </materialDesign:DialogHost>
+    </Grid>
+</Window>

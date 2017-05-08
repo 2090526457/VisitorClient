@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<配置参数 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <应用ID>10380ea0-c494-4812-81b2-18e2cd852442</应用ID>
+  <访问起始时间>08:30</访问起始时间>
+  <访问结束时间>17:15</访问结束时间>
+  <数据源基地址>http://api.xiafeng.net</数据源基地址>
+  <队列服务地址>xiafeng.net</队列服务地址>
+  <主题色>blue</主题色>
+</配置参数>
